@@ -9,21 +9,43 @@ app.use(express.json());
 app.use(cors());
 // Database Connection
 
-const db = mysql.createConnection({
-  host: "sql12.freesqldatabase.com", // Use hosted DB host
-  user: "sql12762031", // Your DB username
-  password: "Zt1Q7TqQ7r", // Your DB password
-  database: "sql12762031", // Your DB name
-  port: 3306, // MySQL default port
+// const db = mysql.createConnection({
+//   host: "sql12.freesqldatabase.com", // Use hosted DB host
+//   user: "sql12762031", // Your DB username
+//   password: "Zt1Q7TqQ7r", // Your DB password
+//   database: "sql12762031", // Your DB name
+//   port: 3306, // MySQL default port
+// });
+// db.connect((err) => {
+//   if (err) {
+//     console.error("Database connection failed:", err);
+//     throw err;
+//   }
+//   console.log("Connected to MySQL database!");
+// });
+
+const db = mysql.createPool({
+  connectionLimit: 10, // Adjust as needed
+  host: "sql12.freesqldatabase.com",
+  user: "sql12762031",
+  password: "Zt1Q7TqQ7r",
+  database: "sql12762031",
+  waitForConnections: true,
+  queueLimit: 0
 });
 
-db.connect((err) => {
+// Test the database connection
+db.getConnection((err, connection) => {
   if (err) {
     console.error("Database connection failed:", err);
     throw err;
   }
   console.log("Connected to MySQL database!");
+  connection.release(); // Release the connection back to the pool
 });
+
+
+
 
 
 // Nodemailer Transporter
@@ -64,7 +86,7 @@ app.get("/check-enrollment/:email", (req, res) => {
   const { email } = req.params;
   const currentMonth = new Date().getMonth() + 1; // 1-12
 
-  const sql = `SELECT 1 FROM users WHERE email = ? AND MONTH(created_at) = ? LIMIT 1;
+  const sql = `SELECT * FROM users WHERE email = ? AND MONTH(created_at) = ? LIMIT 1;
 `;
   db.query(sql, [email, currentMonth], (err, results) => {
     if (err) {
