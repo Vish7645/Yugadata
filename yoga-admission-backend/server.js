@@ -10,11 +10,11 @@ app.use(cors());
 // Database Connection
 
 const db = mysql.createConnection({
-  host: process.env.host,
-  user: process.env.user,
-  password: 'Zt1Q7TqQ7r',
-  database: process.env.database,
-  port: process.env.port
+  host: "sql12.freesqldatabase.com", // Use hosted DB host
+  user: "sql12762031", // Your DB username
+  password: "Zt1Q7TqQ7r", // Your DB password
+  database: "sql12762031", // Your DB name
+  port: 3306, // MySQL default port
 });
 
 db.connect((err) => {
