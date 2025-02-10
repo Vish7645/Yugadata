@@ -23,7 +23,7 @@ const AdmissionForm = () => {
     }
 
     try {
-      const response = await axios.get(`http://localhost:5000/check-enrollment/${formData.email}`);
+      const response = await axios.get(`https://yuga-backend.onrender.com/check-enrollment/${formData.email}`);
       if (response.data.enrolled) {
         setIsEnrolled(true);
         alert(`You are already enrolled in batch ${response.data.user.batch_id} for this month.`);
@@ -50,7 +50,7 @@ const AdmissionForm = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:5000/enroll", formData);
+      const response = await axios.post("https://yuga-backend.onrender.com/enroll", formData);
       alert(response.data.message);
     } catch (error) {
       alert(error.response?.data?.message || "Payment failed. Please try again.");
