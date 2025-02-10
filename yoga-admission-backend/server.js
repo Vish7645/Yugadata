@@ -10,19 +10,21 @@ app.use(cors());
 // Database Connection
 
 const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "7645",
-  database: "yoga"
+  host: process.env.host,
+  user: process.env.user,
+  password: 'Zt1Q7TqQ7r',
+  database: process.env.database,
+  port: process.env.port
 });
 
 db.connect((err) => {
   if (err) {
-    console.log("Database error");
+    console.error("Database connection failed:", err);
     throw err;
   }
-  console.log("MySQL Connected");
+  console.log("Connected to MySQL database!");
 });
+
 
 // Nodemailer Transporter
 const transporter = nodemailer.createTransport({
