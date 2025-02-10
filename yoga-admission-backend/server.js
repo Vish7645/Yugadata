@@ -7,8 +7,8 @@ require("dotenv").config();
 const app = express();
 app.use(express.json());
 app.use(cors());
-
 // Database Connection
+
 const db = mysql.createConnection({
   host: "localhost",
   user: "root",
@@ -62,7 +62,8 @@ app.get("/check-enrollment/:email", (req, res) => {
   const { email } = req.params;
   const currentMonth = new Date().getMonth() + 1; // 1-12
 
-  const sql = `SELECT * FROM users WHERE email = ? AND MONTH(created_at) = ?`;
+  const sql = `SELECT 1 FROM users WHERE email = ? AND MONTH(created_at) = ? LIMIT 1;
+`;
   db.query(sql, [email, currentMonth], (err, results) => {
     if (err) {
       return res.status(500).json({ message: "Database error." });

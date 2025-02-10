@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "./AdmissionForm.css"; // Import the CSS file
 
 const AdmissionForm = () => {
   const [formData, setFormData] = useState({
@@ -37,7 +38,7 @@ const AdmissionForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (formData.age < 18 || formData.age > 65) {
       alert("Age must be between 18 and 65.");
       return;
@@ -57,29 +58,29 @@ const AdmissionForm = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-green-300 to-blue-400 p-6">
-      <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md">
-        <h2 className="text-3xl font-semibold text-center text-gray-800 mb-6">Yoga Class Admission</h2>
-        
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <input type="text" name="name" placeholder="Enter your name" required onChange={handleChange} className="w-full p-2 border rounded" />
-          <input type="number" name="age" placeholder="Enter your age" required onChange={handleChange} className="w-full p-2 border rounded" />
-          <input type="email" name="email" placeholder="Enter your email" required onChange={handleChange} className="w-full p-2 border rounded" />
-          
-          <button type="button" onClick={checkEnrollment} className="w-full bg-blue-500 text-white p-3 rounded hover:bg-blue-600">
+    <div className="container">
+      <div className="form-card">
+        <h2 className="form-title">Yoga Class Admission</h2>
+
+        <form onSubmit={handleSubmit}>
+          <input type="text" name="name" placeholder="Enter your name" required onChange={handleChange} />
+          <input type="number" name="age" placeholder="Enter your age" required onChange={handleChange} />
+          <input type="email" name="email" placeholder="Enter your email" required onChange={handleChange} />
+
+          <button type="button" className="check-btn" onClick={checkEnrollment}>
             Check Enrollment
           </button>
 
           {!isEnrolled && (
             <>
-              <input type="text" name="phone" placeholder="Enter your phone number" required onChange={handleChange} className="w-full p-2 border rounded" />
-              <select name="batch" onChange={handleChange} className="w-full p-2 border rounded">
+              <input type="text" name="phone" placeholder="Enter your phone number" required onChange={handleChange} />
+              <select name="batch" onChange={handleChange}>
                 <option>6-7AM</option>
                 <option>7-8AM</option>
                 <option>8-9AM</option>
                 <option>5-6PM</option>
               </select>
-              <button type="submit" className="w-full bg-green-500 text-white p-3 rounded hover:bg-green-600">
+              <button type="submit" className="submit-btn">
                 Enroll & Pay ₹500
               </button>
             </>
