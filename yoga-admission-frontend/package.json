@@ -22,18 +22,10 @@
       "react-app/jest"
     ]
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
+  "browserslist": [
+  "defaults"
+]
+,
   "devDependencies": {
     "autoprefixer": "^10.4.20",
     "postcss": "^8.5.1",
