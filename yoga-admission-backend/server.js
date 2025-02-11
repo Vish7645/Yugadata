@@ -25,7 +25,7 @@ app.use(cors());
 // });
 
 const db = mysql.createPool({
-  connectionLimit: 10, // Adjust as needed
+  connectionLimit: 10,
   host: "sql12.freesqldatabase.com",
   user: "sql12762031",
   password: "Zt1Q7TqQ7r",
@@ -36,12 +36,12 @@ const db = mysql.createPool({
 
 // Test the database connection
 db.getConnection((err, connection) => {
-  if (err) {
+  if (err){
     console.error("Database connection failed:", err);
     throw err;
   }
   console.log("Connected to MySQL database!");
-  connection.release(); // Release the connection back to the pool
+  connection.release(); 
 });
 
 
